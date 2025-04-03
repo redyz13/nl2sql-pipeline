@@ -20,6 +20,7 @@ from schema_linking.config.config import (
 
 print_header("Input")
 question = "Quali sono le descrizioni di rigo delle voci contabili del 2011?"
+print("Question: {question}")
 
 print_header("Step 1: Extracting keywords using LLM...")
 keywords = llama_keyword_extraction(question)
@@ -50,7 +51,6 @@ pretty_print_list("Filtered Columns (LLM)", llm_filtered_columns)
 
 print_header("Step 5: LLM-based table linking (using filtered columns)...")
 candidate_tables = list(set([col.split('.')[0] for col in llm_filtered_columns]))
-pretty_print_list("Candidate Tables", candidate_tables)
 
 linked_tables = llama_table_linking(question, candidate_tables)
 

@@ -3,6 +3,10 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+# Base directory configuration
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
+DATA_DIR = os.path.join(PROJECT_ROOT, "data")
+
 # Database configuration
 DATABASE_URL = os.getenv("DATABASE_URL")
 
@@ -16,8 +20,5 @@ VERIFY_SSL = False
 TOP_K_COLUMNS = 50
 EMBEDDING_MODEL = "paraphrase-multilingual-mpnet-base-v2"
 
-TABLE_INDEX_BIN = "faiss_tables.bin"
-TABLE_MAPPING_PKL = "faiss_tables.pkl"
-
-COLUMN_INDEX_BIN = "faiss_columns.bin"
-COLUMN_MAPPING_PKL = "faiss_columns.pkl"
+COLUMN_INDEX_BIN = os.path.join(DATA_DIR, "faiss_columns.bin")
+COLUMN_MAPPING_PKL = os.path.join(DATA_DIR, "faiss_columns.pkl")

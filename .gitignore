@@ -2,6 +2,6 @@ venv/
 yapapi/
 .env
 pyvenv.cfg
-faiss_tables.bin
-faiss_tables.pkl
+faiss_columns.bin
+faiss_columns.pkl
 __pycache__/
