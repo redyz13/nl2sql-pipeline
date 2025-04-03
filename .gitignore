@@ -1,0 +1,6 @@
+venv/
+yapapi/
+.env
+pyvenv.cfg
+faiss_tables.bin
+faiss_tables.pkl
