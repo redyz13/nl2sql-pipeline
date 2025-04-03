@@ -13,7 +13,6 @@ LLAMA_API_PASS = os.getenv("LLAMA_API_PASS")
 VERIFY_SSL = False
 
 # Schema linking configuration
-TOP_K_TABLES = 30
 TOP_K_COLUMNS = 50
 EMBEDDING_MODEL = "paraphrase-multilingual-mpnet-base-v2"
 
