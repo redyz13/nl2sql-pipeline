@@ -20,7 +20,7 @@ from schema_linking.config.config import (
 
 print_header("Input")
 question = "Quali sono le descrizioni di rigo delle voci contabili del 2011?"
-print("Question: {question}")
+print(f"Question: {question}")
 
 print_header("Step 1: Extracting keywords using LLM...")
 keywords = llama_keyword_extraction(question)
