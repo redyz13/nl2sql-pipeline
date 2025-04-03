@@ -29,6 +29,7 @@ keyword_string = " ".join(keywords)
 
 print_header("Step 2: Loading schema...")
 column_texts = extract_column_texts()
+print(f"Loaded {len(column_texts)} columns")
 
 print_header(f"Step 3: FAISS column pruning (top {TOP_K_COLUMNS}) using keywords...")
 column_index, column_map = build_or_load_index(column_texts)
