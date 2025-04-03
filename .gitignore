@@ -4,3 +4,4 @@ yapapi/
 pyvenv.cfg
 faiss_tables.bin
 faiss_tables.pkl
+__pycache__/
