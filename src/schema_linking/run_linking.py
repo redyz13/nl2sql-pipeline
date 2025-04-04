@@ -19,7 +19,7 @@ from schema_linking.config.config import (
 )
 
 print_header("Input")
-question = "Quali sono le descrizioni di rigo delle voci contabili del 2011?"
+question = "Quali attività IVA risultano ancora valide nel 2024?"
 print(f"Question: {question}")
 
 print_header("Step 1: Extracting keywords using LLM...")

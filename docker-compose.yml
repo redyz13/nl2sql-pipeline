@@ -11,5 +11,5 @@ services:
     command: >
       bash -c "
         cd src &&
-        python -m schema_linking.evaluation.evaluate_pruning
+        python -m schema_linking.run_linking
       "
