@@ -24,7 +24,6 @@ print(f"Question: {question}")
 print_header("Step 1: Extracting keywords using LLM...")
 keywords = llama_keyword_extraction(question)
 print_keywords(keywords)
-keyword_string = " ".join(keywords)
 
 print_header("Step 2: Loading schema...")
 column_texts = extract_active_column_texts()
@@ -41,7 +40,7 @@ if not pruned_columns:
 pretty_print_list("Pruned Columns (FAISS)", pruned_columns)
 
 print_header("Step 4: LLM filtering on pruned columns...")
-llm_filtered_columns = llama_filter_columns_by_keywords(keyword_string, pruned_columns, keywords)
+llm_filtered_columns = llama_filter_columns_by_keywords(question, pruned_columns, keywords)
 
 if not llm_filtered_columns:
     print("\nNo columns passed the LLM filtering.")
@@ -62,7 +61,7 @@ pretty_print_list("Linked Tables (LLM)", linked_tables)
 
 print_header("Step 6: LLM-based final column linking...")
 final_columns = [col for col in llm_filtered_columns if col.split('.')[0] in linked_tables]
-linked_columns = llama_column_linking(keyword_string, final_columns)
+linked_columns = llama_column_linking(question, final_columns)
 
 if not linked_columns:
     print("\nNo columns linked by LLM.")
