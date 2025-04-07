@@ -22,3 +22,6 @@ EMBEDDING_MODEL = "paraphrase-multilingual-mpnet-base-v2"
 
 COLUMN_INDEX_BIN = os.path.join(DATA_DIR, "faiss_columns.bin")
 COLUMN_MAPPING_PKL = os.path.join(DATA_DIR, "faiss_columns.pkl")
+
+ACTIVE_TABLES_PATH = os.path.join(DATA_DIR, "active_tables.parquet")
+ACTIVE_FIELDS_PATH = os.path.join(DATA_DIR, "active_fields.parquet")

@@ -4,4 +4,6 @@ yapapi/
 pyvenv.cfg
 faiss_columns.bin
 faiss_columns.pkl
+active_fields.parquet
+active_tables.parquet
 __pycache__/

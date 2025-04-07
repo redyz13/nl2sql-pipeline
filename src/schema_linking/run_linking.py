@@ -18,7 +18,7 @@ from schema_linking.config.config import (
 )
 
 print_header("Input")
-question = "Quali attività IVA risultano ancora valide nel 2024?"
+question = "Qual è l'indirizzo e la località delle banche con codice CAB 12345?"
 print(f"Question: {question}")
 
 print_header("Step 1: Extracting keywords using LLM...")
