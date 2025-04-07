@@ -3,7 +3,7 @@ import os
 
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
-from schema_linking.schema.extract_schema import extract_column_texts
+from schema_linking.schema.extract_schema import extract_active_column_texts
 from schema_linking.keywords.keyword_extractor import llama_keyword_extraction
 from schema_linking.retrieval.retriever import build_or_load_index, retrieve_top_k
 from schema_linking.llm.llama_linker import llama_table_linking, llama_column_linking, llama_filter_columns_by_keywords
@@ -27,12 +27,12 @@ print_keywords(keywords)
 keyword_string = " ".join(keywords)
 
 print_header("Step 2: Loading schema...")
-column_texts = extract_column_texts()
+column_texts = extract_active_column_texts()
 print(f"Loaded {len(column_texts)} columns")
 
 print_header(f"Step 3: FAISS column pruning (top {TOP_K_COLUMNS}) using keywords...")
 column_index, column_map = build_or_load_index(column_texts)
-pruned_columns = retrieve_top_k(column_index, column_map, keyword_string, TOP_K_COLUMNS)
+pruned_columns = retrieve_top_k(column_index, column_map, question, TOP_K_COLUMNS)
 
 if not pruned_columns:
     print("\nNo columns retrieved by FAISS pruning.")
