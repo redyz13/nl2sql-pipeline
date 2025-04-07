@@ -1,7 +1,14 @@
 import os
 import pandas as pd
 from sqlalchemy import text
-from schema_linking.config.config import ACTIVE_TABLES_PATH, ACTIVE_FIELDS_PATH
+from schema_linking.config.config import (
+    ACTIVE_TABLES_PATH,
+    ACTIVE_FIELDS_PATH,
+    FIELD_METADATA
+)
+
+fields_table = FIELD_METADATA["table"]
+field_table_id_col = FIELD_METADATA["table_id_col"]
 
 def get_active_tables(engine, min_rows=1, verbose=False):
     """
@@ -51,9 +58,9 @@ def get_active_tables(engine, min_rows=1, verbose=False):
     return df_active
 
 
-def get_active_fields(engine, df_active_tables, table_fields_name="ba_table_fields", verbose=True):
+def get_active_fields(engine, df_active_tables, verbose=True):
     """
-    Filters ba_table_fields to keep only fields that belong to active tables.
+    Filters fields_table to keep only fields that belong to active tables.
     Uses cached file if available.
     """
     if os.path.exists(ACTIVE_FIELDS_PATH):
@@ -62,13 +69,14 @@ def get_active_fields(engine, df_active_tables, table_fields_name="ba_table_fiel
         return pd.read_parquet(ACTIVE_FIELDS_PATH)
 
     table_names = df_active_tables['table'].str.extract(r'\.(.+)$')[0].tolist()
-    df_fields = pd.read_sql(f"SELECT * FROM {table_fields_name}", engine)
-    df_filtered = df_fields[df_fields['fltableid'].isin(table_names)].copy()
+
+    df_fields = pd.read_sql(f"SELECT * FROM {fields_table}", engine)
+    df_filtered = df_fields[df_fields[field_table_id_col].isin(table_names)].copy()
 
     os.makedirs(os.path.dirname(ACTIVE_FIELDS_PATH), exist_ok=True)
     df_filtered.to_parquet(ACTIVE_FIELDS_PATH)
 
     if verbose:
-        print(f"Filtered ba_table_fields from {len(df_fields)} to {len(df_filtered)} fields (matching active tables).")
+        print(f"Filtered {fields_table} from {len(df_fields)} to {len(df_filtered)} fields (matching active tables).")
 
     return df_filtered

@@ -1,0 +1,13 @@
+Hai una domanda, una lista di parole chiave e una lista di colonne candidate dello schema del database.
+Domanda: {question}
+Parole chiave estratte:
+{keywords}
+
+Colonne candidate:
+{columns}
+
+Seleziona SOLO le colonne potenzialmente rilevanti per rispondere alla domanda.
+Rispondi con una lista nel formato:
+tabella.colonna
+
+Non aggiungere spiegazioni, commenti o altro testo. Solo la lista.

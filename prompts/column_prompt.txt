@@ -1,0 +1,10 @@
+Hai una domanda e una lista di colonne dello schema del database.
+Domanda: {question}
+
+Colonne disponibili:
+{columns}
+
+Seleziona SOLO le colonne rilevanti. Rispondi con una lista nel formato:
+tabella.colonna
+
+Non aggiungere spiegazioni, commenti o altro testo. Solo la lista.

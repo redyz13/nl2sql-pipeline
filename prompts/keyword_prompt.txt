@@ -1,0 +1,11 @@
+Hai una domanda in linguaggio naturale.
+Domanda: "{question}"
+
+Il tuo compito è estrarre esclusivamente le keyword rilevanti per una traduzione da linguaggio naturale a query SQL
+Le keyword sono parole o brevi frasi che rappresentano concetti come:
+- entità
+- condizioni o vincoli
+- funzioni di aggregazione
+- concetti chiave necessari per la traduzione della domanda in una query SQL.
+Rispondi SOLO con una lista di keyword, una per riga, senza spiegazioni, commenti o punteggiatura aggiuntiva. Usa il seguente formato:
+keyword
