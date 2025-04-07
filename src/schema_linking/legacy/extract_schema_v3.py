@@ -13,7 +13,7 @@ def extract_column_texts():
     df_merged = df_fields.merge(df_tables, on="table_id", how="left")
 
     column_texts = [
-        f"{row['table_id']}.{row['field_name']}: {row['field_description'] or 'nessuna descrizione'} (tabella: {row['table_description'] or 'nessuna descrizione'})"
+        f"{row['table_id']}.{row['field_name']}: {row['field_description'] or 'nessuna descrizione'}"
         for _, row in df_merged.iterrows()
     ]
 

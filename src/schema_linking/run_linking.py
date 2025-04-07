@@ -11,7 +11,6 @@ from schema_linking.utils.printer import (
     print_header,
     print_keywords,
     pretty_print_list,
-    pretty_print_table,
     print_summary
 )
 from schema_linking.config.config import (

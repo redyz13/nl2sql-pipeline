@@ -41,7 +41,7 @@ def build_column_filtering_prompt(question: str, column_texts: list[str], keywor
     return (
         f"Hai una domanda, una lista di parole chiave e una lista di colonne candidate dello schema del database.\n"
         f"Domanda: {question}\n"
-        f"Parole chiave estratte: {keyword_text}\n\n"
+        f"Parole chiave estratte:\n{keyword_text}\n\n"
         f"Colonne candidate:\n{schema}\n\n"
         f"Seleziona SOLO le colonne potenzialmente rilevanti per rispondere alla domanda.\n"
         f"Rispondi con una lista nel formato:\n"
