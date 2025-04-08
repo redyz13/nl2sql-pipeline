@@ -25,10 +25,10 @@ FIELD_METADATA = {
     "description_col": "fldescri"
 }
 
-# LLaMA API configuration
-LLAMA_API_URL = os.getenv("LLAMA_API_URL")
-LLAMA_API_USER = os.getenv("LLAMA_API_USER")
-LLAMA_API_PASS = os.getenv("LLAMA_API_PASS")
+# LLM API configuration
+LLM_API_URL = os.getenv("LLM_API_URL")
+LLM_API_USER = os.getenv("LLM_API_USER")
+LLM_API_PASS = os.getenv("LLM_API_PASS")
 VERIFY_SSL = False
 
 # Schema linking configuration
@@ -45,5 +45,6 @@ PROMPT_PATHS = {
     "keyword": os.path.join(PROMPTS_DIR, "keyword_prompt.txt"),
     "column": os.path.join(PROMPTS_DIR, "column_prompt.txt"),
     "table": os.path.join(PROMPTS_DIR, "table_prompt.txt"),
-    "column_filtering": os.path.join(PROMPTS_DIR, "column_filtering_prompt.txt")
+    "final": os.path.join(PROMPTS_DIR, "final_prompt.txt"),
+    "llm_wrapper": os.path.join(PROMPTS_DIR, "llm_wrapper_prompt.txt")
 }

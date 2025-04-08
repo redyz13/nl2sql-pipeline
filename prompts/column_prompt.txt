@@ -4,7 +4,6 @@ Domanda: {question}
 Colonne disponibili:
 {columns}
 
-Seleziona SOLO le colonne rilevanti. Rispondi con una lista nel formato:
+Seleziona SOLO le colonne rilevanti per rispondere alla domanda.
+Rispondi SOLO con una lista di colonne selezionate, una per riga, senza spiegazioni, commenti o punteggiatura aggiuntiva. Usa il seguente formato:
 tabella.colonna
-
-Non aggiungere spiegazioni, commenti o altro testo. Solo la lista.

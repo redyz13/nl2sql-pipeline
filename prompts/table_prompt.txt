@@ -4,7 +4,6 @@ Domanda: {question}
 Tabelle disponibili:
 {tables}
 
-Seleziona SOLO le tabelle rilevanti. Rispondi con una lista nel formato:
-nome_tabella
-
-Non aggiungere spiegazioni, commenti o altro testo. Solo la lista.
+Seleziona SOLO le tabelle rilevanti per rispondere alla domanda.
+Rispondi SOLO con una lista di tabelle selezionate, una per riga, senza spiegazioni, commenti o punteggiatura aggiuntiva. Usa il seguente formato:
+tabella
