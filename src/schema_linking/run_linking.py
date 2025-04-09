@@ -3,6 +3,7 @@ import os
 
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
+from schema_linking.config.config import TOP_K_COLUMNS
 from schema_linking.schema.extract_schema import extract_active_column_texts
 from schema_linking.keywords.keyword_extractor import llm_keyword_extraction
 from schema_linking.retrieval.retriever import build_or_load_index, retrieve_top_k
@@ -13,8 +14,9 @@ from schema_linking.utils.printer import (
     pretty_print_list,
     print_summary
 )
-from schema_linking.config.config import (
-    TOP_K_COLUMNS,
+from schema_linking.utils.schema_utils import (
+    build_table_description_map,
+    build_column_description_map
 )
 
 print_header("Input")
@@ -49,9 +51,11 @@ if not llm_filtered_columns:
 pretty_print_list("Filtered Columns (LLM)", llm_filtered_columns)
 
 print_header("Step 5: LLM-based table linking (using filtered columns)...")
-candidate_tables = list(set([col.split('.')[0] for col in llm_filtered_columns]))
+table_desc_map = build_table_description_map(pruned_columns)
+candidate_tables = list(set(col.split('.')[0] for col in llm_filtered_columns))
+tables_with_desc = [f"{table}: {table_desc_map.get(table, 'nessuna descrizione')}" for table in candidate_tables]
 
-linked_tables = llm_table_linking(question, candidate_tables)
+linked_tables = llm_table_linking(question, tables_with_desc)
 
 if not linked_tables:
     print("\nNo tables linked by LLM.")
@@ -61,7 +65,10 @@ pretty_print_list("Linked Tables (LLM)", linked_tables)
 
 print_header("Step 6: LLM-based final column linking...")
 final_columns = [col for col in llm_filtered_columns if col.split('.')[0] in linked_tables]
-linked_columns = llm_column_linking(question, final_columns)
+column_full_map = build_column_description_map(pruned_columns)
+final_column_descriptions = [column_full_map[c] for c in final_columns if c in column_full_map]
+
+linked_columns = llm_column_linking(question, final_column_descriptions)
 
 if not linked_columns:
     print("\nNo columns linked by LLM.")
