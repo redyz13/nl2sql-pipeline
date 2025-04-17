@@ -1,9 +1,6 @@
 # Ignore the virtual environment folder
 venv/
 
-# Ignore the yapapi folder
-yapapi/
-
 # Ignore Python configuration files
 pyvenv.cfg
 
