@@ -2,14 +2,10 @@ services:
   nl2sql-service:
     build:
       context: .
-    
     env_file:
       - .env
-
-    restart: unless-stopped
-
     command: >
       bash -c "
         cd src &&
-        python -m schema_linking.run_linking
+        python -m ${ENTRY_MODULE}
       "
