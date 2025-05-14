@@ -6,7 +6,7 @@ load_dotenv()
 # Base directory configuration
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 DATA_DIR = os.path.join(PROJECT_ROOT, "data")
-PROMPTS_DIR = os.path.join(PROJECT_ROOT, "prompts")
+PROMPTS_DIR = os.path.join(PROJECT_ROOT, "prompts/schema_linking")
 
 # Database configuration
 DATABASE_URL = os.getenv("DATABASE_URL")

@@ -1,0 +1,265 @@
+### Tabella: ba_keysog001
+- cpupdtms: Update timestamp
+- DTENDVAL: Data fine validita
+- DTINIVAL: Data inizio validita
+- FLACTIVE: Flag record attivo
+- KSCODCAL: Calendario lavorativo
+- KSCODCOM: Codice company per link
+- KSCODCON: Codice contabile
+- KSCODEST: Codice esterno (per comunicazioni stampe,ecc.)
+- KSCODESTOLD: Codice esterno (per comunicazioni stampe,ecc.)
+- KSCODFIS: Codice fiscale
+- KSCODIVA: Partita IVA
+- KSCODRIF: Codice rapporto di riferimento
+- KSCODSOG: Codice soggetto
+- KSDESADD: Ragione sociale supplementare
+- KSDESCRI: Ragione sociale/Cognome e nome
+- KSFILEXP: Abilitato alla produzione del file di esportazione (Vettore)
+- KSFLFOLD: Flag attivazione cartella rapporti. Viene creata in automatico al salvataggio
+- KSFLGASS: Flag associazione senza personalit  giuridica
+- KSFOLDER: Cartella rapporti (DMS)
+- KSFORGIU: Forma giuridica (Valori con lista - 'FORGIU')
+- KSLENCOL: Lunghezza codice collo
+- KSNOTCOR: Note correlate (guid)
+- KSNUMTRA: Numero iscrizione albo autotrasportatori (VET - SPE)
+- KSPARSTE: Parametrizzazione stampa etichette
+- KSPRFCOL: Prefisso codice collo
+- KSRIFPER: Riferimento persona rappresentante (ba_contact)
+- KSSEREST: Riferimento al servizio esterno per il tracking
+- KSTIPSOG: Tipo soggetto
+
+### Tabella: ba_docume_m001
+- DOFLCCOM: Calcola contratti commerciali
+- DOSERIAL: Chiave primaria (GUID)
+- DOFLCICL: Ciclo
+- DOTIPDOC: Tipo documento
+- DONUMREG: Numero registrazione
+- DOTIPMAG: Tipologia Magazzino (solo unit  logistica tipo 2)
+- DOUNISTO: Ubicazione magazzino principale
+- DOUNIST2: Ubicazione magazzino secondario
+- DOCODAZI: Codice company per link 
+- DODATREG: Data di registrazione
+- DODATDOC: Data documento
+- DODATOPE: Data Operazione
+- DONUMDOC: Numero Documento
+- DONUMIVA: Numero registro Iva
+- DOTIPIVA: Tipo registro Iva
+- DOATTIVA: Codice Attivit  Iva
+- DONUMIV2: Numero Registro Iva x Reverse charge
+- DOTIPIV2: Tipo Registro Iva x Reverse charge
+- DOANNPRO: Anno/Esercizio per numerazione protocollo
+- DOSERPRO: Serie Interna per calcolo progr.protocollo
+- DONUMPRO: Numero Protocollo
+- DOALFPRO: Suffisso Numerazione protocollo
+- DOCAOVAL: Cambio rispetto alla valuta di conto
+- DOSTATUS: Status del documento
+- DOFLPROV: Flag movimento confermato/provvisorio
+- DOAGGPRO: Aggiorna numerazione protocollo anche su documenti provvisori
+- DOTIPSOG: Tipo Soggetto Intestatario
+- DOTIPFAT: Tipo Soggetto dati gestionali/invio fattura
+- DOCODESE: Codice Esercizio
+- DODIPFAT: Sede per dati gestionali (Vettore, forza vendita, ecc.)
+- DODIPSOG: Sede per invio fattura
+- DOUTIENT: Flag utilizza lettera di intento
+- DOFLSCOR: Flag scorporo su piede fattura
+- DODIPCON: Sede Soggetto di Consegna (ba_offices)
+- DOTIPAGE: Tipologia anagrafica forza vendita
+- DOTIPSPE: Tipologia anagrafica spedizioniere
+- DORUOAG1: Ruolo forza vendita 1 (Valori con lista: RUOAGE)
+- DORUOAG2: Ruolo forza vendita 2 (Valori con lista: RUOAGE)
+- DODATPAG: Data inizio Pagamento (per pagamenti Diversi)
+- DOGIOFIS: Giorno fisso di pagamento
+- DOSCOCAS: Sconto finanziario (Pagamento) in Percentuale
+- DOVALCAS: Sconto finanziario (Pagamento) in Valore
+- DOFZSCFI: Flag forzatura sconti finanziari
+- DOFLIVAM: Flag Castelletto Iva manuale
+- DOFLRATE: Flag Pagamento con rate Manuali
+- DOFLDCOR: Flag Forza modalit  incasso
+- DOTIPVET: Tipologia Anagrafica Vettore
+- DONOMPOR: Nome porto
+- DODESTRA: Descrizione modalit  di trasporto
+- DOCODASP: Codice Aspetto esteriore dei Beni
+- DODESASP: Descrizione aspetto esteriore
+- DONUMCOL: Numero Colli
+- DONUMPAL: Numero pallets/Contenitori
+- DOPESLOR: Peso Lordo (Kg)
+- DOPESNET: Peso Netto (Kg)
+- DOVOLUME: Volume 
+- DODATTRA: Data inizio Trasporto
+- DOORATRA: Ora Inizio Trasporto
+- DOMINTRA: Minuto Trasporto
+- DODATCON: Data Consegna Effettiva
+- DOORACON: Ora Consegna Effettiva
+- DOMINCON: Minuto consegna
+- DOSCOCO1: Prima percentuale sconto commerciale
+- DOSCOCO2: Seconda percentuale sconto commerciale
+- DOSCOPAG: Sconto commerciale sul pagamento
+- DOVALCOM: Sconto commerciale in valore
+- DOVALSPA: Sconto commerciale sul pagamento in valore
+- DOFZSCCO: Flag forzatura sconti commerciali
+- DOFZSPAG: Flag forzatura sconto commerciale sul pagamento
+- DOIMPTRA: Importo spese Trasporto
+- DOIMPINC: Importo spese Incasso
+- DOIMPIMB: Importo spese Imballo
+- DOIMPSPE: Importo Altre spese
+- DOIMPBOL: Importo Bolli esenti
+- DOIMPARR: Importo Arrotondamenti
+- DOTOTIMP: Totale Imponibile (esclusi bolli esenti)
+- DOTOTIVA: Totale imposta
+- DOFLGPRO: Applica promozione
+- DOFLTRAS: Flag documento Iva autortrasportatori (non gestito)
+- DOFLCONT: Flag documento contabilizzato
+- DORIFCON: Riferimnto seriale reg.contabile generata
+- DONOTCOR: Note correlate (guid)
+- DOFLGIOM: Flag giornale di magazzino
+- DOMOTCRE: Motivo blocco credito(Valori con lista:'MOTCRE')
+- DODATPLA: Data competenza plafond
+- DOSERDIB: Rif. Seriale documento - Esplosione distinta base
+- DOROWDIB: Rif. N.riga documento - Esplosione distinta base
+- DOFORRIP: Flag forza ripartizione
+- DODATIVA: Data competenza Iva
+- DODATRET: Data di rettifica operazione
+- DOSTOREID: Codice negozio per ecommerce
+- DOIMPPRE: Importo prepagato
+- DOPAGCON: Tipo incasso/pagamento contestuale
+- DOFLINTR: Documento INTRA
+- DOSTATRA: Stato transazione (per eCommerce)
+- DOPARCHF: Partecipa al cash flow
+- DOFLRIVA: Documento contabilizzato  con scarichi rivalorizzati
+- DOIMPASS: Importo assicurato
+- DOFLCOLL: Flag calcolo colli
+- DOPARMSP: Guid parametrizzazione modalit  spedizion
+- DOROWMSP: Riga parametrizzazione modalit  spedizione
+- DOFILGEN: Se attivo ha partecipato alla generazione del file corrieri
+- DOFLEVPA: Flag ammette evasione parziale
+- DOPRIORI: Priorit  ordine
+- DOFZPREV: Forza priorit  ed evadibilit 
+- DOFLPICK: Picking list elaborata
+- DOOFFCRM: Flag offerta CRM
+- DODIBKEY: Codice Distinta Base di generazione (RILASCIATA)
+- DODIBROW: Progressivo Distinta (RILASCIATA)
+- DOPKLNOC: Flag packing list non corretta
+- DOSALCOUPON: Campo per aggiornamento consumo Coupon
+- DOCOUPSIGN: Segno per movimento Coupon
+- DOCOUPQTA: Quantit  per incremento/strono coupon
+- DOFLCCID: Calcola contratti, Immediati, Differiti Tutti
+- DOAPPINC: Flag applica spese di incasso
+- DOIMPMIN: Importo minimo ordinabile
+- DOVALMIN: Valuta importo minimo
+- DOPERINC: Percentuale spesa incasso (da listino cliente)
+- DOVALINC: Valore spesa incasso (da listino cliente)
+- DOFLSCOC: Tipologia di calcolo sconti commerciali di piede (0=No, 1=Immediata, 2=Scaglioni totale)
+- DOFLSINC: Tipologia di calcolo spese incasso (0=No, 1=Immediata, 2=Scaglioni totale)
+- DOSCCART: Guid articolo per sconti commerciali di piede
+- DOINCART: Guid articolo per spese incasso
+- DOFLPRVA: Flag aggiorna provvigioni in variazione documento
+- DODISLOC: Distanza in chilometri della sede di consegna
+- DOCONTRA: Codice contratto
+- DOIMPABB: Importo abbuono
+- DOTIPTER: Tipo soggetto intermediario
+- DOCODTER: Codice soggetto intermediario
+- DOTIPDIP: Tipo soggetto operatore Pos (DIC)
+- DOCODDIP: Codice soggetto operatore Pos
+- DOCODREP: Reparto
+- DONUMRAT: Numero rate per pagamenti multipli
+- DOVALRAT: Valore rata normale (per gestione rate multiple)
+- DOTIPDEP: Tipologia per beni deperibili gestita dal documento
+- DOSERDDR: AHPROD - Seriale DDT di Rientro
+- DOROWDDR: AHPROD - Riga DDT di Rientro
+- DOQTAWARN: Disponibilit  in WARNING da generazione documenti
+- DOFLGINT: Flag stampa partita IVA / codice fiscale
+- DOCONPRE: Contabilizza importo prepagato
+- DOOLDPRE: Totale importo prepagato documenti origine
+- DOTRACKING: Tracking number per il DDT
+- DOORDEXP: Data di scadenza ordine salvato
+- DODDTRIE: Seriale DDt Di rientro
+- DOFLSCOP: Tipologia di calcolo sconti commerciali sul pagamento (0=No, 1=Immediata, 2=Scaglioni totale)
+- DOSCPART: Guid articolo per sconti commerciali sul pagamento
+- DOCHKDIB: Codice di controllo per modifica documento ba_chkdiscomp.MPIDELAB
+- DOCHKOCL: Id Verifica Disponibilit  Consuntivazione OCL
+- DOPOSCNT: AHIPOS Guid scontrino 
+- DOFLASPE: Documento abilitato al calcolo delle spese per spedizioniere
+- DORIFSCN: AHIPOS - Riferimento scontrino chiusura giornaliera emesso-sospeso
+- DOPESRSP: Totale peso per la ripartizione delle spese
+- DOVALRSP: Totale valore per la ripartizione delle spese
+- DOFASEDOC: Fase
+- DOSEREVT: Seriale documento da evadere
+- DOTMSTAMP: Timestamp di inserimento
+- DOCRECOMP: Codice company di creazione
+- DOPRZNET: Evidenzia prezzi al netto
+- DOFLSTFA: AHIPOS -  Documento di storno fattura
+- DOTOTVALCON: Totale documento in valuta di conto
+- DOFLGCALPRO: Calcolo promozioni
+- cpupdtms: Update timestamp
+- DONUMPER: Numero periodo
+- DOCODPOR: Codice Porto (INCOTERM)
+- DOCAUMAG: Codice Causale Magazzino
+- DOCAUMA2: Causale magazzino collegata
+- DOCODMAG: Codice Magazzino di riga
+- DOCODMA2: Codice Magazzino di Contropartita di Riga (collegato)
+- DOMODTRA: Codice modalit  di trasporto
+- DOBANNOS: Codice C/C nostra banca
+- DOIVAESE: Codice Iva esente
+- DOCODLPZ: Codice Listino Prezzi
+- DOCODLSC: Codice Listino Sconti
+- DOBANCLF: Riferimento Banca/CC di appoggio Cli/For
+- DOLINPRO: Codice Linea prodotto
+- DOCODVAL: Valuta documento
+- DOBUSUNI: Business  Unit
+- DOCODPAG: Codice Pagamento
+- DOCODUFF: Codice ufficio
+- DOCODSOG: Codice Soggetto Intestatario (ba_keysog)
+- DOSOGFAT: Codice Soggetto per dati gestionali (ba_keysog)
+- DOCODAGE: Codice forza vendita
+- DOAGESUP: Codice forza vendita di supporto
+- DOCODVET: Codice Primo Vettore
+- DOCODVE2: Codice Secondo Vettore
+- DOCODVE3: Codice Terzo Vettore
+- DOCODSPZ: Codice spedizioniere (Tipo SPE)
+- DOTIPPAL: Tipo pallet
+- DOTCONTA: Tipo container
+- DOCOMMAR: Compagnia marittima
+- DOPARSPE: Numero parametrizzazione spese
+- DORIFENT: Riferimento lettera di intento
+- DOCCRPRE: Conto corrente per importo prepagato
+- DOCODTRA: Codice transazione (pagamento online)
+- DOCODFAT: Codice Soggetto per invio fattura (ba_keysog)
+- DOCODLIN: Codice lingua di stampa
+- DOFIDCAR: Fidelity card
+- DOTIPCOL: Tipo collo
+- DOPARPRE: Guid parametrizzazione priorit  / evadibilit 
+- DOCOMMAG: Commessa movimento magazzino
+- DOCODUTE: Codice Soggetto utente di registrazione (ba_contact)
+- DOANAFAT: Anagrafica Soggetto per invio fattura (ba_contact)
+- DOANACON: Anagrafica Soggetto di Consegna (ba_contact)
+- DOCOUPON: Coupon
+- DOCODSCA: Codice scalo(porto/aeroporto)
+- DOCAUCON: Codice Causale contabile
+- DOCODCAU: Codice Causale documento
+- DOIDPLANM: AHPROD - Id di Pianificazione di Testata
+- DOSTOREPOS: Punto Vendita POS per calcolo promozioni
+
+### Tabella: ba_commes001
+- COCODICE: Codice Commessa
+- CODESCRI: Descrizione
+- CONOTCOR: Note correlate (guid)
+- COTIPRIC: Tipo riclassificazione di analitica
+- FLACTIVE: Flag record attivo, intero che vale 1 per attivo, 0 per non attivo
+- DTINIVAL: Data inizio validit 
+- DTENDVAL: Data fine validit 
+- COTIPSOG: Tipo soggetto (CLI)
+- CODESSUP: Descrizione aggiuntiva
+- CODATINI: Inizio commessa
+- CODATFIN: Fine commessa
+- COPRIORI: Priorit 
+- COSTATO: Stato commessa (Valori con lista - 
+- COTIPCOM: Tipo commessa (Valori con lista - 
+- COCODVAL: Valuta
+- COIMPRIF: Importo di riferimento
+- COSERDOC: Guid documento di budget
+- COCIGCUP: Codice Cig e Cup
+- COCODRAG: Codice raggruppamento (COAN)
+- COCODATT: Codice attivit  commessa di default
+- CORICBIL: Riclassificazione di analitica
+- COCODSOG: Codice rapporto
+
