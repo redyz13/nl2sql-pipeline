@@ -252,8 +252,8 @@
 - CODATINI: Inizio commessa
 - CODATFIN: Fine commessa
 - COPRIORI: Priorit 
-- COSTATO: Stato commessa (Valori con lista - 
-- COTIPCOM: Tipo commessa (Valori con lista - 
+- COSTATO: Stato commessa (Stato della commessa. '020' attiva, '040' chiusa)
+- COTIPCOM: (TOFIX) Tipo commessa (Valori con lista
 - COCODVAL: Valuta
 - COIMPRIF: Importo di riferimento
 - COSERDOC: Guid documento di budget

@@ -1,8 +1,12 @@
 import sys
 import os
 from zero_shot_openai.llm.llm_linker import llm_generate_sql
+from zero_shot_openai.schema.extract_schema import generate_schema_prompt
 
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+
+# 📄 Extracts table and column descriptions from metadata and formats them for LLM prompts (skips if file exists)
+generate_schema_prompt()
 
 question = "Quali sono le ragioni sociali, con i relativi codici fiscali, associate al tipo soggetto 'CLI' in una commessa?"
 

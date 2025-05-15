@@ -15,3 +15,22 @@ PROMPT_PATHS = {
 # LLM API configuration
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 OPENAI_MODEL_ID = os.getenv("OPENAI_MODEL_ID", "gpt-4o-mini")
+
+# Database configuration
+DATABASE_URL = os.getenv("DATABASE_URL")
+
+# Schema configuration
+TABLES = ["ba_commes", "ba_keysog", "ba_docume_m"]
+
+TABLE_METADATA = {
+    "table": "ba_table_mod",
+    "id_col": "dttableid",
+    "description_col": "dtdescri"
+}
+
+FIELD_METADATA = {
+    "table": "ba_table_fields",
+    "table_id_col": "fltableid",
+    "field_id_col": "flfieldid",
+    "description_col": "fldescri"
+}
