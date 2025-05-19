@@ -1,7 +1,7 @@
 import sys
 import os
-from zero_shot_openai.llm.llm_linker import llm_generate_sql
-from zero_shot_openai.schema.extract_schema import generate_schema_prompt
+from zero_shot.llm.llm_linker import llm_generate_sql
+from zero_shot.schema.extract_schema import generate_schema_prompt
 
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 

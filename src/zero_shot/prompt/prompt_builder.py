@@ -1,5 +1,5 @@
 from datetime import date
-from zero_shot_openai.config.config import PROMPT_PATHS
+from zero_shot.config.config import PROMPT_PATHS
 
 def load_prompt(template_path: str) -> str:
     with open(template_path, 'r', encoding='utf-8') as f:

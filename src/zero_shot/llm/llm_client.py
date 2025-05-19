@@ -1,5 +1,5 @@
 from openai import OpenAI
-from zero_shot_openai.config.config import OPENAI_API_KEY, OPENAI_MODEL_ID
+from zero_shot.config.config import OPENAI_API_KEY, OPENAI_MODEL_ID
 
 client = OpenAI(api_key=OPENAI_API_KEY)
 

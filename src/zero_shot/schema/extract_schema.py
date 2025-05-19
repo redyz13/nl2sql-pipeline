@@ -1,7 +1,7 @@
 import os
 import pandas as pd
 from sqlalchemy import create_engine
-from zero_shot_openai.config.config import (
+from zero_shot.config.config import (
     DATABASE_URL,
     TABLES,
     TABLE_METADATA,
