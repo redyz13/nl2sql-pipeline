@@ -5,7 +5,7 @@ load_dotenv()
 
 # Base directory configuration
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", ".."))
-PROMPTS_DIR = os.path.join(PROJECT_ROOT, "prompts/zero_shot_openai")
+PROMPTS_DIR = os.path.join(PROJECT_ROOT, "prompts/zero_shot")
 
 PROMPT_PATHS = {
     "schema": os.path.join(PROMPTS_DIR, "schema_llm_prompt.txt"),
