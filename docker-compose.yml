@@ -1,11 +1,31 @@
 services:
-  nl2sql-service:
+  nl2sql-api:
     build:
       context: .
+    container_name: nl2sql-api
+    ports:
+      - "8000:8000"
     env_file:
       - .env
     command: >
       bash -c "
         cd src &&
         python -m ${ENTRY_MODULE}
+      "
+
+  nl2sql-ui:
+    build:
+      context: .
+      dockerfile: Dockerfile.ui
+    container_name: nl2sql-ui
+    ports:
+      - "7860:7860"
+    env_file:
+      - .env
+    depends_on:
+      - nl2sql-api
+    command: >
+      bash -c "
+        cd src &&
+        python -m ${UI_MODULE}
       "

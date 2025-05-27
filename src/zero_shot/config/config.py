@@ -3,6 +3,15 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+# Environment configuration
+APP_ENV = os.getenv("APP_ENV")
+ALLOWED_ORIGINS = (
+    ["https://localhost:3000"] if APP_ENV == "production" else ["*"]
+)
+API_HOST = os.getenv("API_HOST");
+API_PORT = int(os.getenv("API_PORT"));
+API_URL = f"http://{API_HOST}:{API_PORT}/query"
+
 # Base directory configuration
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 PROMPTS_DIR = os.path.join(PROJECT_ROOT, "prompts/zero_shot")
