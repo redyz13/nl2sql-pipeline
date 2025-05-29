@@ -8,6 +8,10 @@ I nomi delle tabelle terminano con '001'.
 
 Ignora i campi che presentano 'TOFIX'.
 
+Collegamenti tra le tabelle:
+- ba_docume_m001.DOCODSOG = ba_commes001.COCODSOG  (documento → commessa)
+- ba_docume_m001.DOCODSOG = ba_keysog001.KSCODSOG AND ba_docume_m001.DOTIPSOG = ba_keysog001.KSTIPSOG  (documento → soggetto)
+
 Se usi una colonna in WHERE, LIKE, ILIKE o ORDER BY, assicurati di includerla anche nella lista di SELECT.
 
 Se possibile evita di selezionare tutte le colonne con *, piuttosto specifica i nomi di ciascuna colonna nella SELECT.
