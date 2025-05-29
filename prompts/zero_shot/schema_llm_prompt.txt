@@ -52,7 +52,7 @@
 - DONUMPRO: Numero Protocollo
 - DOALFPRO: Suffisso Numerazione protocollo
 - DOCAOVAL: Cambio rispetto alla valuta di conto
-- DOSTATUS: Status del documento
+- DOSTATUS: Status del documento (attualmente ha sempre valore 0 intero)
 - DOFLPROV: Flag movimento confermato/provvisorio
 - DOAGGPRO: Aggiorna numerazione protocollo anche su documenti provvisori
 - DOTIPSOG: Tipo Soggetto Intestatario
