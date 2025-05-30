@@ -241,7 +241,7 @@
 
 ### Tabella: ba_commes001
 - COCODICE: Codice Commessa
-- CODESCRI: Descrizione
+- CODESCRI: Nome prodotto
 - CONOTCOR: Note correlate (guid)
 - COTIPRIC: Tipo riclassificazione di analitica
 - FLACTIVE: Flag record attivo, intero che vale 1 per attivo, 0 per non attivo
