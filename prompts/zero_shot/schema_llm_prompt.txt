@@ -41,7 +41,7 @@
 - DODATREG: Data di registrazione
 - DODATDOC: Data documento
 - DODATOPE: Data Operazione
-- DONUMDOC: Numero Documento
+- DONUMDOC: Numero Documento (contare quante volte è stato venduto un prodotto)
 - DONUMIVA: Numero registro Iva
 - DOTIPIVA: Tipo registro Iva
 - DOATTIVA: Codice Attivit  Iva
@@ -80,7 +80,7 @@
 - DODESTRA: Descrizione modalit  di trasporto
 - DOCODASP: Codice Aspetto esteriore dei Beni
 - DODESASP: Descrizione aspetto esteriore
-- DONUMCOL: Numero Colli
+- DONUMCOL: Numero Colli (per quantità di prodotti venduti)
 - DONUMPAL: Numero pallets/Contenitori
 - DOPESLOR: Peso Lordo (Kg)
 - DOPESNET: Peso Netto (Kg)
