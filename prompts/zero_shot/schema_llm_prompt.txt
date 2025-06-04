@@ -247,7 +247,7 @@
 - FLACTIVE: Flag record attivo, intero che vale 1 per attivo, 0 per non attivo
 - DTINIVAL: Data inizio validit 
 - DTENDVAL: Data fine validit 
-- COTIPSOG: Tipo soggetto (CLI)
+- COTIPSOG: Tipo soggetto (CLI, della tabella ba_commes001)
 - CODESSUP: Descrizione aggiuntiva
 - CODATINI: Inizio commessa
 - CODATFIN: Fine commessa
