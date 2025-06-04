@@ -34,6 +34,93 @@
 - DOFLCICL: Ciclo
 - DOTIPDOC: Tipo documento ('DDT'=Trasporto, 'FAT'=Fattura, 'GEN'=Generico, 'NCR'=Nota di credito, 'ORD'=Ordine, 'PRE'=Preventivo)
 - DONUMREG: Numero registrazione
+- DOTIPMAG: Tipologia Magazzino (solo unit  logistica tipo 2)
+- DOUNISTO: Ubicazione magazzino principale
+- DOUNIST2: Ubicazione magazzino secondario
+- DOCODAZI: Codice company per link 
+- DODATREG: Data di registrazione
+- DODATDOC: Data documento
+- DODATOPE: Data Operazione
+- DONUMDOC: Numero Documento (contare quante volte è stato venduto un prodotto)
+- DONUMIVA: Numero registro Iva
+- DOTIPIVA: Tipo registro Iva
+- DOATTIVA: Codice Attivit  Iva
+- DONUMIV2: Numero Registro Iva x Reverse charge
+- DOTIPIV2: Tipo Registro Iva x Reverse charge
+- DOANNPRO: Anno/Esercizio per numerazione protocollo
+- DOSERPRO: Serie Interna per calcolo progr.protocollo
+- DONUMPRO: Numero Protocollo
+- DOALFPRO: Suffisso Numerazione protocollo
+- DOCAOVAL: Cambio rispetto alla valuta di conto
+- DOSTATUS: Status del documento (attualmente ha sempre valore 0 intero)
+- DOFLPROV: Flag movimento confermato/provvisorio
+- DOAGGPRO: Aggiorna numerazione protocollo anche su documenti provvisori
+- DOTIPSOG: Tipo Soggetto Intestatario
+- DOTIPFAT: Tipo Soggetto dati gestionali/invio fattura
+- DOCODESE: Codice Esercizio
+- DODIPFAT: Sede per dati gestionali (Vettore, forza vendita, ecc.)
+- DODIPSOG: Sede per invio fattura
+- DOUTIENT: Flag utilizza lettera di intento
+- DOFLSCOR: Flag scorporo su piede fattura
+- DODIPCON: Sede Soggetto di Consegna (ba_offices)
+- DOTIPAGE: Tipologia anagrafica forza vendita
+- DOTIPSPE: Tipologia anagrafica spedizioniere
+- DORUOAG1: Ruolo forza vendita 1 (Valori con lista: RUOAGE)
+- DORUOAG2: Ruolo forza vendita 2 (Valori con lista: RUOAGE)
+- DODATPAG: Data inizio Pagamento (per pagamenti Diversi)
+- DOGIOFIS: Giorno fisso di pagamento
+- DOSCOCAS: Sconto finanziario (Pagamento) in Percentuale
+- DOVALCAS: Sconto finanziario (Pagamento) in Valore
+- DOFZSCFI: Flag forzatura sconti finanziari
+- DOFLIVAM: Flag Castelletto Iva manuale
+- DOFLRATE: Flag Pagamento con rate Manuali
+- DOFLDCOR: Flag Forza modalit  incasso
+- DOTIPVET: Tipologia Anagrafica Vettore
+- DONOMPOR: Nome porto
+- DODESTRA: Descrizione modalit  di trasporto
+- DOCODASP: Codice Aspetto esteriore dei Beni
+- DODESASP: Descrizione aspetto esteriore
+- DONUMCOL: Numero Colli (per quantità di prodotti venduti)
+- DONUMPAL: Numero pallets/Contenitori
+- DOPESLOR: Peso Lordo (Kg)
+- DOPESNET: Peso Netto (Kg)
+- DOVOLUME: Volume 
+- DODATTRA: Data inizio Trasporto
+- DOORATRA: Ora Inizio Trasporto
+- DOMINTRA: Minuto Trasporto
+- DODATCON: Data Consegna Effettiva
+- DOORACON: Ora Consegna Effettiva
+- DOMINCON: Minuto consegna
+- DOSCOCO1: Prima percentuale sconto commerciale
+- DOSCOCO2: Seconda percentuale sconto commerciale
+- DOSCOPAG: Sconto commerciale sul pagamento
+- DOVALCOM: Sconto commerciale in valore
+- DOVALSPA: Sconto commerciale sul pagamento in valore
+- DOFZSCCO: Flag forzatura sconti commerciali
+- DOFZSPAG: Flag forzatura sconto commerciale sul pagamento
+- DOIMPTRA: Importo spese Trasporto
+- DOIMPINC: Importo spese Incasso
+- DOIMPIMB: Importo spese Imballo
+- DOIMPSPE: Importo Altre spese
+- DOIMPBOL: Importo Bolli esenti
+- DOIMPARR: Importo Arrotondamenti
+- DOTOTIMP: Totale Imponibile (esclusi bolli esenti)
+- DOTOTIVA: Totale imposta
+- DOFLGPRO: Applica promozione
+- DOFLTRAS: Flag documento Iva autortrasportatori (non gestito)
+- DOFLCONT: Flag documento contabilizzato
+- DORIFCON: Riferimnto seriale reg.contabile generata
+- DONOTCOR: Note correlate (guid)
+- DOFLGIOM: Flag giornale di magazzino
+- DOMOTCRE: Motivo blocco credito(Valori con lista:'MOTCRE')
+- DODATPLA: Data competenza plafond
+- DOSERDIB: Rif. Seriale documento - Esplosione distinta base
+- DOROWDIB: Rif. N.riga documento - Esplosione distinta base
+- DOFORRIP: Flag forza ripartizione
+- DODATIVA: Data competenza Iva
+- DODATRET: Data di rettifica operazione
+- DOSTOREID: Codice negozio per ecommerceAdd commentMore actions
+- DOIMPPRE: Importo prepagato
 - DOPAGCON: Tipo incasso/pagamento contestuale
 - DOFLINTR: Documento INTRA
 - DOSTATRA: Stato transazione (per eCommerce)
