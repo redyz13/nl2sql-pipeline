@@ -119,7 +119,7 @@
 - DOFORRIP: Flag forza ripartizione
 - DODATIVA: Data competenza Iva
 - DODATRET: Data di rettifica operazione
-- DOSTOREID: Codice negozio per ecommerceAdd commentMore actions
+- DOSTOREID: Codice negozio per ecommerce
 - DOIMPPRE: Importo prepagato
 - DOPAGCON: Tipo incasso/pagamento contestuale
 - DOFLINTR: Documento INTRA
