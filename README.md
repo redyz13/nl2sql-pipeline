@@ -72,11 +72,5 @@ python -m zero_shot.ui.app
 ## Legacy Modules
 For details on legacy modules such as schema linking, see the dedicated README in `legacy/`.
 
-## Database Overview
-- Total tables: 6839
-- Average columns per table: ~18.9
-- Tables with primary key: ~92%
-- High complexity and large schema support
-
 ## Acknowledgements
-This project builds upon research in NL2SQL solutions including CHESS, PICARD,RED and related literature.
+This project builds upon research in NL2SQL solutions including CHESS, PICARD, RED and related literature.
