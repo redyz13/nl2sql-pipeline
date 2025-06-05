@@ -3,8 +3,7 @@ import pandas as pd
 import tempfile
 from zero_shot.api.executor import call_nl2sql_and_execute
 from zero_shot.config.config import APP_ENV
-
-latest_df = {"data": pd.DataFrame()}
+from zero_shot.visualization.plot import generate_plot
 
 def run_query(question):
     sql, df = call_nl2sql_and_execute(question)
@@ -14,16 +13,19 @@ def run_query(question):
     elif df.empty:
         df = pd.DataFrame([["No results found."]], columns=["Message"])
 
-    latest_df["data"] = df.copy()
+    plot_img = generate_plot(df)
 
-    yield sql, gr.update(visible=False), gr.update(visible=False)
-    yield sql, gr.update(value=df, visible=True), gr.update(visible=True)
-
-def export_csv():
-    df = latest_df["data"]
     with tempfile.NamedTemporaryFile(mode="w", suffix=".csv", delete=False, newline="", encoding="utf-8") as f:
         df.to_csv(f.name, index=False)
-        return f.name
+        csv_path = f.name
+
+    return (
+        sql,
+        gr.update(value=df, visible=True),
+        gr.update(value=plot_img, visible=bool(plot_img)),
+        gr.update(value=csv_path, visible=False),
+        gr.update(value=csv_path, visible=True),
+    )
 
 with gr.Blocks() as demo:
     gr.Markdown("<h1 style='text-align: center;'>NL2SQL UI</h1>")
@@ -37,31 +39,35 @@ with gr.Blocks() as demo:
 
     sql_output = gr.Textbox(label="Generated SQL query", lines=6)
     df_output = gr.Dataframe(label="Query result (max 50 rows)", visible=False)
-    download_btn = gr.DownloadButton(label="📥 Export to CSV", visible=False)
+    img_plot = gr.Image(label="📊 Auto-generated Chart", visible=False, type="pil")
+    file_output = gr.File(visible=False)
+    download_btn = gr.DownloadButton("📥 Export to CSV", value=None, visible=False)
 
     run_btn.click(
-        fn=lambda: (gr.update(visible=False), gr.update(visible=False)),
+        fn=lambda: (
+            gr.update(value=""),
+            gr.update(visible=False),
+            gr.update(visible=False),
+            gr.update(visible=False),
+            gr.update(visible=False),
+        ),
         inputs=None,
-        outputs=[df_output, download_btn],
+        outputs=[sql_output, df_output, img_plot, file_output, download_btn],
         queue=False
     )
 
     run_btn.click(
         fn=run_query,
         inputs=question,
-        outputs=[sql_output, df_output, download_btn]
-    )
-
-    download_btn.click(
-        fn=export_csv,
-        inputs=None,
-        outputs=download_btn
+        outputs=[sql_output, df_output, img_plot, file_output, download_btn]
     )
 
     clear_btn.click(
-        fn=lambda: ("", "", gr.update(value=None, visible=False), gr.update(visible=False)),
+        fn=lambda: (
+            "", "", gr.update(value=None, visible=False), gr.update(visible=False), gr.update(value=None, visible=False)
+        ),
         inputs=None,
-        outputs=[question, sql_output, df_output, download_btn]
+        outputs=[question, sql_output, df_output, img_plot, download_btn]
     )
 
 demo.launch(server_name="0.0.0.0")
