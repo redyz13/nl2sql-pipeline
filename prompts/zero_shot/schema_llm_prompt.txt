@@ -240,7 +240,7 @@
 - DOSTOREPOS: Punto Vendita POS per calcolo promozioni
 
 ### Tabella: ba_commes001
-- COCODICE: Codice Commessa
+- COCODICE: Codice univoco Commessa
 - CODESCRI: Nome prodotto
 - CONOTCOR: Note correlate (guid)
 - COTIPRIC: Tipo riclassificazione di analitica
@@ -258,7 +258,7 @@
 - COIMPRIF: Importo di riferimento
 - COSERDOC: Guid documento di budget
 - COCIGCUP: Codice Cig e Cup
-- COCODRAG: Codice raggruppamento (COAN)
+- COCODRAG: Codice per raggruppamento (COAN)
 - COCODATT: Codice attivit  commessa di default
 - CORICBIL: Riclassificazione di analitica
 - COCODSOG: Codice rapporto

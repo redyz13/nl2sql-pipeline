@@ -39,9 +39,11 @@ with gr.Blocks() as demo:
 
     sql_output = gr.Textbox(label="Generated SQL query", lines=6)
     df_output = gr.Dataframe(label="Query result (max 50 rows)", visible=False)
-    img_plot = gr.Image(label="📊 Auto-generated Chart", visible=False, type="pil")
-    file_output = gr.File(visible=False)
+    
     download_btn = gr.DownloadButton("📥 Export to CSV", value=None, visible=False)
+    img_plot = gr.Image(label="📊 Auto-generated Chart", visible=False, type="pil")
+    
+    file_output = gr.File(visible=False)
 
     run_btn.click(
         fn=lambda: (
