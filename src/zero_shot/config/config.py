@@ -43,3 +43,8 @@ FIELD_METADATA = {
     "field_id_col": "flfieldid",
     "description_col": "fldescri"
 }
+
+# Plot blacklist
+PLOT_BLACKLIST = {
+    "KSDESCRI", "KSCODFIS", "KSCODIVA", "COCODICE", "DONUMDOC", "DOCODSOG"
+}
