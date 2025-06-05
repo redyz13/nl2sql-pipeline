@@ -1,6 +1,6 @@
 import pandas as pd
 import requests
-from zero_shot.config.config import API_URL
+from zero_shot.config.config import API_URL, MAX_RESULT_ROWS
 from zero_shot.schema.db_executor import is_safe_sql, run_sql_query
 
 def call_nl2sql_and_execute(question: str):
@@ -14,7 +14,7 @@ def call_nl2sql_and_execute(question: str):
             return sql, pd.DataFrame([["Only SELECT queries are allowed."]], columns=["Error"])
 
         df = run_sql_query(sql)
-        return sql, df.head(50) if not df.empty else pd.DataFrame([["No results found."]], columns=["Message"])
+        return sql, df.head(MAX_RESULT_ROWS) if not df.empty else pd.DataFrame([["No results found."]], columns=["Message"])
 
     except Exception as e:
         return "[ERROR]", pd.DataFrame([[str(e)]], columns=["Error"])

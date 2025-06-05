@@ -2,7 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import io
 from PIL import Image
-from zero_shot.config.config import PLOT_BLACKLIST
+from zero_shot.config.config import MAX_PLOT_POINTS, PLOT_BLACKLIST
 
 def generate_plot(df: pd.DataFrame) -> Image.Image | None:
     if df.shape[1] < 2 or df.shape[0] < 2:
@@ -34,7 +34,7 @@ def generate_plot(df: pd.DataFrame) -> Image.Image | None:
     if is_x_date:
         df_plot = df_plot.sort_values(by=x_col)
     else:
-        df_plot = df_plot.sort_values(by=y_col, ascending=False).head(20)
+        df_plot = df_plot.sort_values(by=y_col, ascending=False).head(MAX_PLOT_POINTS)
 
     if is_x_date:
         kind = "line"

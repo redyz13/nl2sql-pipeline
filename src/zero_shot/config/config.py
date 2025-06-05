@@ -44,7 +44,9 @@ FIELD_METADATA = {
     "description_col": "fldescri"
 }
 
-# Plot blacklist
+# Table and plot configuration
+MAX_RESULT_ROWS = 50
+MAX_PLOT_POINTS = 20
 PLOT_BLACKLIST = {
     "KSDESCRI", "KSCODFIS", "KSCODIVA", "COCODICE", "DONUMDOC", "DOCODSOG"
 }

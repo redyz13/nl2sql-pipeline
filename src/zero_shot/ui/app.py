@@ -2,7 +2,7 @@ import gradio as gr
 import pandas as pd
 import tempfile
 from zero_shot.api.executor import call_nl2sql_and_execute
-from zero_shot.config.config import APP_ENV
+from zero_shot.config.config import APP_ENV, MAX_RESULT_ROWS
 from zero_shot.visualization.plot import generate_plot
 
 def run_query(question):
@@ -38,7 +38,7 @@ with gr.Blocks() as demo:
         run_btn = gr.Button("Submit", variant="primary")
 
     sql_output = gr.Textbox(label="Generated SQL query", lines=6)
-    df_output = gr.Dataframe(label="Query result (max 50 rows)", visible=False)
+    df_output = gr.Dataframe(label=f"Query result (max {MAX_RESULT_ROWS} rows)", visible=False)
     
     download_btn = gr.DownloadButton("📥 Export to CSV", value=None, visible=False)
     img_plot = gr.Image(label="📊 Auto-generated Chart", visible=False, type="pil")
