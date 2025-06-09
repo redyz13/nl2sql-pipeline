@@ -2,10 +2,16 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import io
 from PIL import Image
-from zero_shot.config.config import MAX_PLOT_POINTS, PLOT_BLACKLIST
+from zero_shot.config.config import (
+    MAX_PLOT_POINTS, PLOT_BLACKLIST,
+    MIN_PLOT_ROWS, MIN_PLOT_COLS,
+    MIN_DISTINCT_Y, MAX_PIE_UNIQUE,
+    MAX_PIE_ROWS, LABEL_LENGTH_THRESHOLD,
+    PLOT_FIGSIZE, PLOT_DPI
+)
 
 def generate_plot(df: pd.DataFrame) -> Image.Image | None:
-    if df.shape[1] < 2 or df.shape[0] < 2:
+    if df.shape[1] < MIN_PLOT_COLS or df.shape[0] < MIN_PLOT_ROWS:
         return None
 
     x_col = df.columns[0]
@@ -27,7 +33,7 @@ def generate_plot(df: pd.DataFrame) -> Image.Image | None:
 
     df_plot = df[[x_col, y_col]].copy()
     df_plot = df_plot[(df_plot[y_col].notna()) & (df_plot[y_col] > 0)]
-    if df_plot.shape[0] < 2 or df_plot[y_col].nunique() == 1:
+    if df_plot.shape[0] < MIN_PLOT_ROWS or df_plot[y_col].nunique() < MIN_DISTINCT_Y:
         return None
 
     is_x_date = pd.api.types.is_datetime64_any_dtype(df_plot[x_col])
@@ -40,12 +46,12 @@ def generate_plot(df: pd.DataFrame) -> Image.Image | None:
         kind = "line"
     elif pd.api.types.is_numeric_dtype(df_plot[x_col]) and pd.api.types.is_numeric_dtype(df_plot[y_col]):
         kind = "scatter"
-    elif df_plot[x_col].nunique() <= 4 and df_plot.shape[0] <= 10:
+    elif df_plot[x_col].nunique() <= MAX_PIE_UNIQUE and df_plot.shape[0] <= MAX_PIE_ROWS:
         kind = "pie"
     else:
-        kind = "barh" if df_plot[x_col].astype(str).str.len().max() > 25 else "bar"
+        kind = "barh" if df_plot[x_col].astype(str).str.len().max() > LABEL_LENGTH_THRESHOLD else "bar"
 
-    fig, ax = plt.subplots(figsize=(8, 5), dpi=250)
+    fig, ax = plt.subplots(figsize=PLOT_FIGSIZE, dpi=PLOT_DPI)
 
     if kind == "pie":
         pie_data = df_plot.dropna()
