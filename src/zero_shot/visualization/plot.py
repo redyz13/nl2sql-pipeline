@@ -31,15 +31,22 @@ def generate_plot(df: pd.DataFrame) -> Image.Image | None:
         return None
 
     df_plot = df[[x_col, y_col]].copy()
-    df_plot = df_plot[(df_plot[y_col].notna()) & (df_plot[y_col] > 0)]
+
+    df_plot = df_plot[df_plot[y_col].notna()]
+    if (df_plot[y_col] > 0).sum() >= MIN_PLOT_ROWS:
+        df_plot = df_plot[df_plot[y_col] > 0]
+
     if df_plot.shape[0] < MIN_PLOT_ROWS or df_plot[y_col].nunique() < MIN_DISTINCT_Y:
         return None
 
-    try:
-        df_plot[x_col] = pd.to_datetime(df_plot[x_col])
-        is_x_date = True
-    except Exception:
-        is_x_date = pd.api.types.is_datetime64_any_dtype(df_plot[x_col])
+    if not pd.api.types.is_numeric_dtype(df_plot[x_col]):
+        try:
+            df_plot[x_col] = pd.to_datetime(df_plot[x_col])
+            is_x_date = True
+        except Exception:
+            is_x_date = False
+    else:
+        is_x_date = False
 
     if is_x_date:
         df_plot = df_plot.sort_values(by=x_col)
