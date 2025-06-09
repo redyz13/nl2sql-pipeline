@@ -5,7 +5,7 @@ from PIL import Image
 from zero_shot.config.config import (
     MAX_BAR_ITEMS, MAX_LINE_POINTS, MAX_SCATTER_POINTS,
     PLOT_BLACKLIST, MIN_PLOT_ROWS, MIN_PLOT_COLS,
-    MIN_DISTINCT_Y, MAX_PIE_UNIQUE, MAX_PIE_ROWS,
+    MIN_DISTINCT_Y, MAX_PIE_UNIQUE,
     LABEL_LENGTH_THRESHOLD, PLOT_FIGSIZE, PLOT_DPI
 )
 
@@ -35,7 +35,12 @@ def generate_plot(df: pd.DataFrame) -> Image.Image | None:
     if df_plot.shape[0] < MIN_PLOT_ROWS or df_plot[y_col].nunique() < MIN_DISTINCT_Y:
         return None
 
-    is_x_date = pd.api.types.is_datetime64_any_dtype(df_plot[x_col])
+    try:
+        df_plot[x_col] = pd.to_datetime(df_plot[x_col])
+        is_x_date = True
+    except Exception:
+        is_x_date = pd.api.types.is_datetime64_any_dtype(df_plot[x_col])
+
     if is_x_date:
         df_plot = df_plot.sort_values(by=x_col)
     else:
@@ -45,17 +50,21 @@ def generate_plot(df: pd.DataFrame) -> Image.Image | None:
         kind = "line"
     elif pd.api.types.is_numeric_dtype(df_plot[x_col]) and pd.api.types.is_numeric_dtype(df_plot[y_col]):
         kind = "scatter"
-    elif df_plot[x_col].nunique() <= MAX_PIE_UNIQUE and df_plot.shape[0] <= MAX_PIE_ROWS:
+    elif df_plot[x_col].nunique() <= MAX_PIE_UNIQUE:
         kind = "pie"
     else:
         kind = "barh" if df_plot[x_col].astype(str).str.len().max() > LABEL_LENGTH_THRESHOLD else "bar"
 
-    if kind == "line":
-        df_plot = df_plot.head(MAX_LINE_POINTS)
-    elif kind == "scatter":
-        df_plot = df_plot.head(MAX_SCATTER_POINTS)
-    elif kind in ("bar", "barh", "pie"):
-        df_plot = df_plot.head(MAX_BAR_ITEMS)
+    max_points = {
+        "line": MAX_LINE_POINTS,
+        "scatter": MAX_SCATTER_POINTS,
+        "bar": MAX_BAR_ITEMS,
+        "barh": MAX_BAR_ITEMS,
+        "pie": MAX_PIE_UNIQUE
+    }.get(kind, MAX_BAR_ITEMS)
+
+    df_plot = df_plot.head(max_points)
+    print(f"📉 Number of points for {kind} plot (max {max_points}): {df_plot.shape[0]}")
 
     fig, ax = plt.subplots(figsize=PLOT_FIGSIZE, dpi=PLOT_DPI)
 
