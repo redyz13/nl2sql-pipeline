@@ -3,11 +3,10 @@ import matplotlib.pyplot as plt
 import io
 from PIL import Image
 from zero_shot.config.config import (
-    MAX_PLOT_POINTS, PLOT_BLACKLIST,
-    MIN_PLOT_ROWS, MIN_PLOT_COLS,
-    MIN_DISTINCT_Y, MAX_PIE_UNIQUE,
-    MAX_PIE_ROWS, LABEL_LENGTH_THRESHOLD,
-    PLOT_FIGSIZE, PLOT_DPI
+    MAX_BAR_ITEMS, MAX_LINE_POINTS, MAX_SCATTER_POINTS,
+    PLOT_BLACKLIST, MIN_PLOT_ROWS, MIN_PLOT_COLS,
+    MIN_DISTINCT_Y, MAX_PIE_UNIQUE, MAX_PIE_ROWS,
+    LABEL_LENGTH_THRESHOLD, PLOT_FIGSIZE, PLOT_DPI
 )
 
 def generate_plot(df: pd.DataFrame) -> Image.Image | None:
@@ -40,7 +39,7 @@ def generate_plot(df: pd.DataFrame) -> Image.Image | None:
     if is_x_date:
         df_plot = df_plot.sort_values(by=x_col)
     else:
-        df_plot = df_plot.sort_values(by=y_col, ascending=False).head(MAX_PLOT_POINTS)
+        df_plot = df_plot.sort_values(by=y_col, ascending=False)
 
     if is_x_date:
         kind = "line"
@@ -50,6 +49,13 @@ def generate_plot(df: pd.DataFrame) -> Image.Image | None:
         kind = "pie"
     else:
         kind = "barh" if df_plot[x_col].astype(str).str.len().max() > LABEL_LENGTH_THRESHOLD else "bar"
+
+    if kind == "line":
+        df_plot = df_plot.head(MAX_LINE_POINTS)
+    elif kind == "scatter":
+        df_plot = df_plot.head(MAX_SCATTER_POINTS)
+    elif kind in ("bar", "barh", "pie"):
+        df_plot = df_plot.head(MAX_BAR_ITEMS)
 
     fig, ax = plt.subplots(figsize=PLOT_FIGSIZE, dpi=PLOT_DPI)
 
