@@ -47,19 +47,25 @@ FIELD_METADATA = {
 # Table and plot configuration
 MAX_RESULT_ROWS = 50  # Maximum number of rows to display in result tables
 
-# Plot item limits
-MAX_BAR_ITEMS = 20       # Max items in bar or barh plots
-MAX_LINE_POINTS = 1000   # Max data points in line plots
-MAX_SCATTER_POINTS = 500 # Max data points in scatter plots
-MAX_PIE_UNIQUE = 4       # Max unique categories for pie charts
+# Maximum data limits for different plot types
+MAX_POINTS = {
+    "line": 1000,
+    "scatter": 500,
+    "bar": 20,
+    "barh": 20,
+    "pie": 4
+}
 
-# Minimum data requirements for plotting
+# Valid plot types
+VALID_KINDS = set(MAX_POINTS.keys())
+
+# Plot constraints
 MIN_PLOT_ROWS = 2        # Min rows required to generate a plot
 MIN_PLOT_COLS = 2        # Min columns required to generate a plot
 MIN_DISTINCT_Y = 2       # Min distinct numeric Y values
+LABEL_LENGTH_THRESHOLD = 25 # Switch to horizontal bars if labels are too long
 
 # Plot appearance
-LABEL_LENGTH_THRESHOLD = 25 # Switch to horizontal bars if labels are too long
 PLOT_FIGSIZE = (8, 5)       # Default figure size
 PLOT_DPI = 250              # Plot resolution (dots per inch)
 

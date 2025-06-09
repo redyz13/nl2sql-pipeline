@@ -3,19 +3,17 @@ import matplotlib.pyplot as plt
 import io
 from PIL import Image
 from zero_shot.config.config import (
-    MAX_BAR_ITEMS, MAX_LINE_POINTS, MAX_SCATTER_POINTS,
-    PLOT_BLACKLIST, MIN_PLOT_ROWS, MIN_PLOT_COLS,
-    MIN_DISTINCT_Y, MAX_PIE_UNIQUE,
-    LABEL_LENGTH_THRESHOLD, PLOT_FIGSIZE, PLOT_DPI
+    MAX_POINTS, PLOT_BLACKLIST, MIN_PLOT_ROWS, MIN_PLOT_COLS,
+    MIN_DISTINCT_Y, LABEL_LENGTH_THRESHOLD, PLOT_FIGSIZE, PLOT_DPI
 )
 
-def generate_plot(df: pd.DataFrame) -> Image.Image | None:
+def preprocess_dataframe(df: pd.DataFrame) -> pd.DataFrame | None:
     if df.shape[1] < MIN_PLOT_COLS or df.shape[0] < MIN_PLOT_ROWS:
         return None
 
     x_col = df.columns[0]
-
     y_col = next((col for col in df.columns[1:] if pd.api.types.is_numeric_dtype(df[col])), None)
+
     if y_col is None:
         for col in df.columns[1:]:
             try:
@@ -31,7 +29,6 @@ def generate_plot(df: pd.DataFrame) -> Image.Image | None:
         return None
 
     df_plot = df[[x_col, y_col]].copy()
-
     df_plot = df_plot[df_plot[y_col].notna()]
     if (df_plot[y_col] > 0).sum() >= MIN_PLOT_ROWS:
         df_plot = df_plot[df_plot[y_col] > 0]
@@ -39,39 +36,53 @@ def generate_plot(df: pd.DataFrame) -> Image.Image | None:
     if df_plot.shape[0] < MIN_PLOT_ROWS or df_plot[y_col].nunique() < MIN_DISTINCT_Y:
         return None
 
+    return df_plot
+
+def determine_kind(df_plot: pd.DataFrame) -> str | None:
+    x_col, y_col = df_plot.columns[0], df_plot.columns[1]
+
+    is_x_date = False
     if not pd.api.types.is_numeric_dtype(df_plot[x_col]):
         try:
             df_plot[x_col] = pd.to_datetime(df_plot[x_col])
             is_x_date = True
         except Exception:
-            is_x_date = False
-    else:
-        is_x_date = False
+            pass
 
     if is_x_date:
+        return "line"
+    if pd.api.types.is_numeric_dtype(df_plot[x_col]) and pd.api.types.is_numeric_dtype(df_plot[y_col]):
+        return "scatter"
+    if df_plot[x_col].nunique() <= MAX_POINTS["pie"]:
+        return "pie"
+    if df_plot[x_col].astype(str).str.len().max() > LABEL_LENGTH_THRESHOLD:
+        return "barh"
+    return "bar"
+
+def get_plot_type(df: pd.DataFrame) -> str | None:
+    df_plot = preprocess_dataframe(df)
+    if df_plot is None:
+        return None
+    return determine_kind(df_plot)
+
+def generate_plot(df: pd.DataFrame) -> tuple[Image.Image | None, str | None]:
+    df_plot = preprocess_dataframe(df)
+    if df_plot is None:
+        return None, None
+
+    kind = determine_kind(df_plot)
+    if kind is None:
+        return None, None
+
+    x_col, y_col = df_plot.columns[0], df_plot.columns[1]
+
+    if kind == "line":
         df_plot = df_plot.sort_values(by=x_col)
     else:
         df_plot = df_plot.sort_values(by=y_col, ascending=False)
 
-    if is_x_date:
-        kind = "line"
-    elif pd.api.types.is_numeric_dtype(df_plot[x_col]) and pd.api.types.is_numeric_dtype(df_plot[y_col]):
-        kind = "scatter"
-    elif df_plot[x_col].nunique() <= MAX_PIE_UNIQUE:
-        kind = "pie"
-    else:
-        kind = "barh" if df_plot[x_col].astype(str).str.len().max() > LABEL_LENGTH_THRESHOLD else "bar"
-
-    max_points = {
-        "line": MAX_LINE_POINTS,
-        "scatter": MAX_SCATTER_POINTS,
-        "bar": MAX_BAR_ITEMS,
-        "barh": MAX_BAR_ITEMS,
-        "pie": MAX_PIE_UNIQUE
-    }.get(kind, MAX_BAR_ITEMS)
-
-    df_plot = df_plot.head(max_points)
-    print(f"📉 Number of points for {kind} plot (max {max_points}): {df_plot.shape[0]}")
+    df_plot = df_plot.head(MAX_POINTS.get(kind, 20))
+    print(f"📉 Number of points for {kind} plot (max {MAX_POINTS.get(kind)}): {df_plot.shape[0]}")
 
     fig, ax = plt.subplots(figsize=PLOT_FIGSIZE, dpi=PLOT_DPI)
 
@@ -95,4 +106,4 @@ def generate_plot(df: pd.DataFrame) -> Image.Image | None:
     plt.close(fig)
     buf.seek(0)
 
-    return Image.open(buf)
+    return Image.open(buf), kind
