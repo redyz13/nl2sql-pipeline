@@ -45,18 +45,25 @@ FIELD_METADATA = {
 }
 
 # Table and plot configuration
-MAX_RESULT_ROWS = 50
-MAX_BAR_ITEMS = 20
-MAX_LINE_POINTS = 1000
-MAX_SCATTER_POINTS = 500
-MIN_PLOT_ROWS = 2
-MIN_PLOT_COLS = 2
-MIN_DISTINCT_Y = 2
-MAX_PIE_UNIQUE = 4
-MAX_PIE_ROWS = 10
-LABEL_LENGTH_THRESHOLD = 25
-PLOT_FIGSIZE = (8, 5)
-PLOT_DPI = 250
+MAX_RESULT_ROWS = 50  # Maximum number of rows to display in result tables
+
+# Plot item limits
+MAX_BAR_ITEMS = 20       # Max items in bar or barh plots
+MAX_LINE_POINTS = 1000   # Max data points in line plots
+MAX_SCATTER_POINTS = 500 # Max data points in scatter plots
+MAX_PIE_UNIQUE = 4       # Max unique categories for pie charts
+
+# Minimum data requirements for plotting
+MIN_PLOT_ROWS = 2        # Min rows required to generate a plot
+MIN_PLOT_COLS = 2        # Min columns required to generate a plot
+MIN_DISTINCT_Y = 2       # Min distinct numeric Y values
+
+# Plot appearance
+LABEL_LENGTH_THRESHOLD = 25 # Switch to horizontal bars if labels are too long
+PLOT_FIGSIZE = (8, 5)       # Default figure size
+PLOT_DPI = 250              # Plot resolution (dots per inch)
+
+# Columns excluded from plotting
 PLOT_BLACKLIST = {
     "KSDESCRI", "KSCODFIS", "KSCODIVA", "COCODICE", "DONUMDOC", "DOCODSOG"
 }
