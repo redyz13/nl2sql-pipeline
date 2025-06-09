@@ -13,7 +13,9 @@ def run_query(question):
     elif df.empty:
         df = pd.DataFrame([["No results found."]], columns=["Message"])
 
-    plot_img = generate_plot(df)
+    plot_img = generate_plot(df.copy())
+
+    df_display = df.head(MAX_RESULT_ROWS)
 
     with tempfile.NamedTemporaryFile(mode="w", suffix=".csv", delete=False, newline="", encoding="utf-8") as f:
         df.to_csv(f.name, index=False)
@@ -21,7 +23,7 @@ def run_query(question):
 
     return (
         sql,
-        gr.update(value=df, visible=True),
+        gr.update(value=df_display, visible=True),
         gr.update(value=plot_img, visible=bool(plot_img)),
         gr.update(value=csv_path, visible=False),
         gr.update(value=csv_path, visible=True),
