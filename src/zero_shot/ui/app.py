@@ -43,7 +43,7 @@ def preview_chart_kind(question: str) -> str:
         return "⚠️ Error during preview."
 
 with gr.Blocks() as demo:
-    gr.Markdown("<h1 style='text-align: center;'>NL2SQL UI</h1>")
+    gr.Markdown("<h1 style='text-align: center;'>NL2SQL</h1>")
     gr.Markdown(f"<p style='text-align: center;'>Environment: <code>{APP_ENV or 'undefined'}</code></p>")
 
     question = gr.Textbox(label="✏️ Natural Language Question", lines=2)
@@ -53,7 +53,7 @@ with gr.Blocks() as demo:
         clear_btn = gr.Button("Clear", variant="secondary")
         run_btn = gr.Button("Submit", variant="primary")
 
-    sql_output = gr.Textbox(label="🧠 Generated SQL Query", lines=6)
+    sql_output = gr.Textbox(label="🧠 Generated SQL Query", lines=2)
     df_output = gr.Dataframe(label=f"Query result (max {MAX_RESULT_ROWS} rows)", visible=False)
     download_btn = gr.DownloadButton("📥 Export to CSV", value=None, visible=False)
     img_plot = gr.Image(label="📊 Auto-generated Chart", visible=False, type="pil")
