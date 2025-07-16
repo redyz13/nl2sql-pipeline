@@ -4,8 +4,17 @@ import io
 from PIL import Image
 from zero_shot.config.config import (
     MAX_POINTS, PLOT_BLACKLIST, MIN_PLOT_ROWS, MIN_PLOT_COLS,
-    MIN_DISTINCT_Y, LABEL_LENGTH_THRESHOLD, PLOT_FIGSIZE, PLOT_DPI
+    MIN_DISTINCT_Y, LABEL_LENGTH_THRESHOLD, PLOT_FIGSIZE, PLOT_DPI,
+    VALID_KINDS, MAX_PIE_CATEGORIES
 )
+
+def try_parse_datetime_column(df: pd.DataFrame, col: str) -> pd.DataFrame:
+    if not pd.api.types.is_numeric_dtype(df[col]):
+        try:
+            df[col] = pd.to_datetime(df[col])
+        except Exception:
+            pass
+    return df
 
 def preprocess_dataframe(df: pd.DataFrame) -> pd.DataFrame | None:
     if df.shape[1] < MIN_PLOT_COLS or df.shape[0] < MIN_PLOT_ROWS:
@@ -53,7 +62,7 @@ def determine_kind(df_plot: pd.DataFrame) -> str | None:
         return "line"
     if pd.api.types.is_numeric_dtype(df_plot[x_col]) and pd.api.types.is_numeric_dtype(df_plot[y_col]):
         return "scatter"
-    if df_plot[x_col].nunique() <= MAX_POINTS["pie"]:
+    if df_plot[x_col].nunique() <= MAX_PIE_CATEGORIES:
         return "pie"
     if df_plot[x_col].astype(str).str.len().max() > LABEL_LENGTH_THRESHOLD:
         return "barh"
@@ -65,24 +74,45 @@ def get_plot_type(df: pd.DataFrame) -> str | None:
         return None
     return determine_kind(df_plot)
 
-def generate_plot(df: pd.DataFrame) -> tuple[Image.Image | None, str | None]:
+def is_kind_supported(df_plot: pd.DataFrame, kind: str) -> bool:
+    if kind not in VALID_KINDS:
+        return False
+
+    x_col, y_col = df_plot.columns[0], df_plot.columns[1]
+
+    if kind == "pie":
+        return df_plot[x_col].nunique() <= MAX_PIE_CATEGORIES
+
+    if kind == "bar":
+        return df_plot[x_col].astype(str).str.len().max() <= LABEL_LENGTH_THRESHOLD
+
+    if kind == "scatter":
+        return (
+            pd.api.types.is_numeric_dtype(df_plot[x_col]) and
+            pd.api.types.is_numeric_dtype(df_plot[y_col])
+        )
+
+    return True
+
+def generate_plot(df: pd.DataFrame, kind: str | None = None) -> tuple[Image.Image | None, str | None]:
     df_plot = preprocess_dataframe(df)
     if df_plot is None:
         return None, None
 
-    kind = determine_kind(df_plot)
     if kind is None:
+        kind = determine_kind(df_plot)
+    elif kind not in VALID_KINDS:
         return None, None
 
     x_col, y_col = df_plot.columns[0], df_plot.columns[1]
 
     if kind == "line":
+        df_plot = try_parse_datetime_column(df_plot, x_col)
         df_plot = df_plot.sort_values(by=x_col)
     else:
         df_plot = df_plot.sort_values(by=y_col, ascending=False)
 
     df_plot = df_plot.head(MAX_POINTS.get(kind, 20))
-    print(f"📉 Number of points for {kind} plot (max {MAX_POINTS.get(kind)}): {df_plot.shape[0]}")
 
     fig, ax = plt.subplots(figsize=PLOT_FIGSIZE, dpi=PLOT_DPI)
 
@@ -107,3 +137,20 @@ def generate_plot(df: pd.DataFrame) -> tuple[Image.Image | None, str | None]:
     buf.seek(0)
 
     return Image.open(buf), kind
+
+def get_supported_kinds(df: pd.DataFrame) -> list[str]:
+    kinds = []
+    df_plot = preprocess_dataframe(df)
+    if df_plot is None:
+        return kinds
+
+    for kind in VALID_KINDS:
+        if not is_kind_supported(df_plot, kind):
+            continue
+        try:
+            img, _ = generate_plot(df.copy(), kind=kind)
+            if img:
+                kinds.append(kind)
+        except:
+            continue
+    return kinds

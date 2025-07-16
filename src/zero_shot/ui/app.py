@@ -2,10 +2,10 @@ import gradio as gr
 import pandas as pd
 import tempfile
 from zero_shot.api.executor import call_nl2sql_and_execute
-from zero_shot.visualization.plot import generate_plot, get_plot_type
+from zero_shot.visualization.plot import generate_plot, get_plot_type, get_supported_kinds
 from zero_shot.config.config import APP_ENV, MAX_RESULT_ROWS
 
-def run_query(question):
+def run_query(question, selected_kind=""):
     sql, df = call_nl2sql_and_execute(question)
 
     if not isinstance(df, pd.DataFrame):
@@ -13,7 +13,8 @@ def run_query(question):
     elif df.empty:
         df = pd.DataFrame([["No results found."]], columns=["Message"])
 
-    plot_img, _ = generate_plot(df.copy())
+    kind = None if selected_kind in (None, "", "auto") else selected_kind
+    plot_img, _ = generate_plot(df.copy(), kind=kind)
     df_display = df.head(MAX_RESULT_ROWS)
 
     with tempfile.NamedTemporaryFile(mode="w", suffix=".csv", delete=False, newline="", encoding="utf-8") as f:
@@ -28,19 +29,25 @@ def run_query(question):
         gr.update(value=csv_path, visible=True),
     )
 
-def preview_chart_kind(question: str) -> str:
+def update_preview_and_dropdown(question: str):
     try:
-        _, df = call_nl2sql_and_execute(question)
+        sql, df = call_nl2sql_and_execute(question)
+
+        msg = "⚠️ No data returned."
+        dropdown = gr.update(choices=[""], value="", interactive=False)
+
         if isinstance(df, pd.DataFrame) and not df.empty:
             df_preview = df.iloc[:20, :10]
             kind = get_plot_type(df_preview)
-            if kind:
-                return f"📊 Expected chart type: {kind.capitalize()}"
-            else:
-                return "⚠️ No valid chart type detected."
-        return "⚠️ No data returned."
+            msg = f"📊 Expected chart type: {kind.capitalize()}" if kind else "⚠️ No valid chart type detected."
+
+            kinds = ["auto"] + get_supported_kinds(df)
+            dropdown = gr.update(choices=kinds, value="auto", interactive=True)
+
+        return msg, dropdown
+
     except Exception:
-        return "⚠️ Error during preview."
+        return "⚠️ Error during preview.", gr.update(choices=["auto"], value="auto", interactive=True)
 
 with gr.Blocks() as demo:
     gr.Markdown("<h1 style='text-align: center;'>NL2SQL</h1>")
@@ -49,6 +56,13 @@ with gr.Blocks() as demo:
     question = gr.Textbox(label="✏️ Natural Language Question", lines=2)
     kind_preview = gr.Textbox(label="🔎 Predicted Chart Type", visible=True, interactive=False)
 
+    chart_kind = gr.Dropdown(
+        label="📂 Select Chart Type",
+        choices=[""],
+        value="",
+        interactive=False
+    )
+
     with gr.Row():
         clear_btn = gr.Button("Clear", variant="secondary")
         run_btn = gr.Button("Submit", variant="primary")
@@ -56,7 +70,7 @@ with gr.Blocks() as demo:
     sql_output = gr.Textbox(label="🧠 Generated SQL Query", lines=2)
     df_output = gr.Dataframe(label=f"Query result (max {MAX_RESULT_ROWS} rows)", visible=False)
     download_btn = gr.DownloadButton("📥 Export to CSV", value=None, visible=False)
-    img_plot = gr.Image(label="📊 Auto-generated Chart", visible=False, type="pil")
+    img_plot = gr.Image(label="📊 Chart", visible=False, type="pil")
     file_output = gr.File(visible=False)
 
     run_btn.click(
@@ -74,7 +88,7 @@ with gr.Blocks() as demo:
 
     run_btn.click(
         fn=run_query,
-        inputs=question,
+        inputs=[question, chart_kind],
         outputs=[sql_output, df_output, img_plot, file_output, download_btn]
     )
 
@@ -88,9 +102,9 @@ with gr.Blocks() as demo:
     )
 
     question.change(
-        fn=preview_chart_kind,
+        fn=update_preview_and_dropdown,
         inputs=question,
-        outputs=kind_preview,
+        outputs=[kind_preview, chart_kind],
         show_progress=False
     )
 

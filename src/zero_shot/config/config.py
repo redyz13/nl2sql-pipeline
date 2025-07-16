@@ -60,9 +60,10 @@ MAX_POINTS = {
 VALID_KINDS = set(MAX_POINTS.keys())
 
 # Plot constraints
-MIN_PLOT_ROWS = 2        # Min rows required to generate a plot
-MIN_PLOT_COLS = 2        # Min columns required to generate a plot
-MIN_DISTINCT_Y = 2       # Min distinct numeric Y values
+MIN_PLOT_ROWS = 2           # Min rows required to generate a plot
+MIN_PLOT_COLS = 2           # Min columns required to generate a plot
+MIN_DISTINCT_Y = 2          # Min distinct numeric Y values
+MAX_PIE_CATEGORIES = 4      # Max number of slices for pie charts
 LABEL_LENGTH_THRESHOLD = 25 # Switch to horizontal bars if labels are too long
 
 # Plot appearance
