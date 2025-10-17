@@ -19,5 +19,3 @@ COPY data /app/data
 # Install the dependencies from requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the entire project into the container
-COPY . /app
