@@ -16,6 +16,9 @@ COPY requirements.txt .
 # Copy the data directory into the container at /app/data
 COPY data /app/data
 
+# Copy the prompts directory into the container at /app/prompts
+COPY prompts/zero_shot /app/prompts/zero_shot
+
 # Install the dependencies from requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
