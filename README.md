@@ -24,9 +24,10 @@ nl2sql-pipeline/
 ├── .gitignore
 ├── Dockerfile
 ├── Dockerfile.ui
-├── docker-compose.yml
-├── requirements.txt
 └── README.md
+├── docker-compose.yml
+├── requirements_api.txt
+├── requirements_ui.txt
 ```
 
 ## Quick Setup
@@ -39,8 +40,23 @@ source venv/bin/activate  # Linux/Mac
 ```
 
 ### 2. Dependencies
+The project separates dependencies into two main groups.
+
+#### API dependencies
+Used for backend logic, schema linking, and LLM interaction.
+
+
+Install with:
 ```bash
-pip install -r requirements.txt
+pip install -r requirements_api.txt
+```
+
+#### UI dependencies
+Used mainly for the interactive user interface.
+
+Install with:
+```bash
+pip install -r requirements_ui.txt
 ```
 
 ### 3. Environment Variables
